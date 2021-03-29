@@ -28,10 +28,31 @@ Also, thanks to my vv cool tutor Mr Jack.
 int i = 0;
 int j = 0;
 int howManySquares = 0;
+int tileSize = 20;
+int userX = 1250;
+int userY = 0;
+int moveUp = 0;
 
 void setup() {
+	background(0);
+	randomSeed(420);
     size(1280,960);
     drawBackground();
+	//assigns values to square
+	/*
+	int[] squareValues = new int[width];
+	int squareColor = 0;
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height/20; j = j + 20){
+			squareColor = int(random(0,255));
+			println(squareColor);
+			squareValues[i] = squareColor;
+			fill(0,squareValues[i],0);
+			square(i,j,20);
+			println("Square filled\n");
+		}
+	}
+	*/
 }
 
 void draw() {
@@ -53,11 +74,30 @@ void drawBackground() {
 }
 
 void playerDraw() {
-/* stroke(255);
-   for(int y = 1; y < mouseY; y++){
-        circle(width/2, y, 20);
-   }
-*/
+	fill(255,0,0);
+	square(userX,userY-10,40);
+	//fill(0,0,255);
+	//triangle(userX - 10,userX-5,userY,userY+5,userX,userX+5);
+	fill(0,0,255);
+	rect(userX, userY, 40, 10);	
+	/*
+	fill(0,255,0);
+	rect(userX+15, userY+30, 10, 30);
+	*/
+
+ 	if(moveUp == 0) { 
+ 		userY = userY + 1; 
+     	if(userY == 900){ 
+              moveUp = 1; 
+    	} 
+ 	} 
+
+  	if(moveUp == 1) { 
+ 		userY = userY - 1; 
+ 	    if(userY == 0){ 
+ 			moveUp = 0; 
+ 		} 
+ 	}
 } 
 void squareBgFunction() {
 	/*
@@ -72,19 +112,17 @@ void squareBgFunction() {
     }
     howManySquares++;
 	*/
-	//assigns values to square
-	int[][] squareValues = new int[width][height];
-	int squareColor = 0;
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j < height; j = j + 20){
-			squareColor = int(random(0,255));
-			//println(squareColor);
-			squareValues[i][j] = squareColor;
-			fill(0,squareColor,0);
-			square(i,j,20);
-		}
-	}
-
+  	int[][] squareValues = new int[ceil(width/20)][ceil(height/20)];
+  	int squareColor = 0;
+  	for (int i = 0; i < width - 60; i+=tileSize) {
+    	for (int j = 0; j < height; j+=tileSize) {
+      		squareColor = int(random(0, 255));
+      		println(squareColor);
+      		squareValues[(i)/20][(j)/20] = squareColor;
+      		fill(0,squareColor,0);
+      		square(i,j,20);
+    }
+  }
 }
 
 //int checkDepth(){
