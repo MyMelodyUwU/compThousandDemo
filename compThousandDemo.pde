@@ -30,7 +30,6 @@ int j = 0;
 int howManySquares = 0;
 
 void setup() {
-    //int[] squareValues = new int[3072]
     size(1280,960);
     drawBackground();
 }
@@ -40,6 +39,8 @@ void draw() {
 }
 
 void drawBackground() {
+	squareBgFunction();
+	/*
     for(int x = 0; x <= 3072; x++) {
         if(j <= height - 60) {
             squareBgFunction(); 
@@ -48,17 +49,20 @@ void drawBackground() {
     }
     fill(128);
     rect(0,height - 60,width,height);
+	*/
 }
 
 void playerDraw() {
-   stroke(255);
+/* stroke(255);
    for(int y = 1; y < mouseY; y++){
         circle(width/2, y, 20);
    }
-}
-
+*/
+} 
 void squareBgFunction() {
+	/*
     float greenColor = random(0,255);
+    squareValues[i][j] = greenColor;
     fill(0,greenColor,0);
     square(i,j,20);
     i = i + 20;
@@ -67,6 +71,20 @@ void squareBgFunction() {
         i = 0;
     }
     howManySquares++;
+	*/
+	//assigns values to square
+	int[][] squareValues = new int[width][height];
+	int squareColor = 0;
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < height; j = j + 20){
+			squareColor = int(random(0,255));
+			//println(squareColor);
+			squareValues[i][j] = squareColor;
+			fill(0,squareColor,0);
+			square(i,j,20);
+		}
+	}
+
 }
 
 //int checkDepth(){
